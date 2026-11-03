@@ -41,3 +41,4 @@
 | [0010](0010-development-roles.md) | 開発の分担: コーディングはローカルのClaude Code、進行はClaudeアプリのプロジェクト | 承認 | 2026-11-02 |
 | [0011](0011-development-process.md) | 開発プロセス: Issue、ブランチ、PR、CI、別セッションのレビューを最初から採用する | 承認 | 2026-11-03 |
 | [0012](0012-templates-and-dod.md) | Issue・PRのテンプレとDoD、バックログ推移の見せ方 | 承認 | 2026-11-03 |
+| [0013](0013-design-principles.md) | デザイン原則(見た目の方針)を定める | 提案 | (未承認) |
