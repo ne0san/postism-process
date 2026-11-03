@@ -1,6 +1,6 @@
 # 現在地
 
-最終更新: 2026-11-02
+最終更新: 2026-11-03
 フェーズ: 設計の前の準備(進め方、記録の仕組み、リポジトリの整備)
 
 ## 決定済み
@@ -16,11 +16,13 @@
 - リポジトリは3つ([0007](decisions/0007-three-repositories.md))
 - 決定ログはこのリポジトリ1か所([0008](decisions/0008-decision-log-operation.md))
 - アプリ名はPostism([0009](decisions/0009-app-name-postism.md))
+- 開発の分担: コーディングはローカルのClaude Code、進行はClaudeアプリのプロジェクト([0010](decisions/0010-development-roles.md))
+- 開発プロセス: Issue、ブランチ、PR、CI、別セッションのレビューを最初から採用([0011](decisions/0011-development-process.md))
 
 ## 次にやること
 
-1. Claudeプロジェクトの作成
-2. プロダクト側のIssuesとProjectsの準備
+1. Claudeアプリのプロジェクトの作成(進行中)
+2. プロダクト側のIssuesとProjectsの準備(Issueの書式、PRのテンプレートを含む)
 3. デザイン原則づくり(質問に答えて言語化する)
 4. 分類の入出力の契約を決めて、サンプルのメモで精度を確かめる
 5. アーキテクチャ設計の残り(下の未決事項)
@@ -37,6 +39,8 @@
 - 「未確認」リスト(AI整理の直後で、まだ見ていない項目を見せる)をどう扱うか
 - Google Play、ドメイン、商標の確認
 - 各リポジトリのライセンス
+- 完成の定義(Definition of Done)、PRのテンプレート、レビューの観点
+- Claude Codeから過程リポジトリを読む具体的な方法
 
 ## 未承認の仮案(決定ではない)
 

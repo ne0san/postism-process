@@ -38,3 +38,5 @@
 | [0007](0007-three-repositories.md) | リポジトリを3つに分ける | 承認 | 2026-11-02 |
 | [0008](0008-decision-log-operation.md) | 決定ログはこのリポジトリ1か所で運用する | 承認 | 2026-11-02 |
 | [0009](0009-app-name-postism.md) | アプリ名はPostismにする | 承認 | 2026-11-02 |
+| [0010](0010-development-roles.md) | 開発の分担: コーディングはローカルのClaude Code、進行はClaudeアプリのプロジェクト | 承認 | 2026-11-02 |
+| [0011](0011-development-process.md) | 開発プロセス: Issue、ブランチ、PR、CI、別セッションのレビューを最初から採用する | 承認 | 2026-11-03 |
