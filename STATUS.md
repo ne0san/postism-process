@@ -25,13 +25,13 @@
 - 入口は、右下の丸い追加ボタンから開くポップアップ([0016](decisions/0016-entry-button-popup.md))
 - 画面構成と表記: 下タブ4つ、「気づき」→「記録」、マーカーの形([0017](decisions/0017-screen-structure-and-labels.md))
 - AIが出す回答には「AIによる回答」と最小限の表記を付ける([0018](decisions/0018-ai-answer-label.md))
-- ミニマル範囲は、投げる / 裏で分類 / 一覧と種類別タブ / 解決にする / 手動の再分類。Issueは次に着手する可能性がある範囲だけ作り、残りは「あとでやる」に置く([0020](decisions/0020-minimal-scope-and-issue-policy.md))
+- ミニマル範囲は、投げる / 裏で分類 / 一覧と種類別タブ / 解決にする / 手動の再分類。Issueは次に着手する可能性がある範囲だけ作り、残りは「あとでやる」に置く([0020](decisions/0020-minimal-scope-and-issue-policy.md))。ミニマルのIssue: [#1 投げる](https://github.com/ne0san/postism/issues/1) / [#2 一覧と種類別タブ](https://github.com/ne0san/postism/issues/2) / [#3 裏で分類](https://github.com/ne0san/postism/issues/3) / [#4 解決にする](https://github.com/ne0san/postism/issues/4) / [#5 手動で再分類](https://github.com/ne0san/postism/issues/5)
 
 ## 次にやること
 
-1. 分類の入出力の契約を決めて、サンプルのメモで精度を確かめる(分類の種類の増減を含む)
+1. 分類の入出力の契約を決めて、サンプルのメモで精度を確かめる(分類の種類の増減を含む。#3の前提)
 2. 解決済みの疑問の見せ方と、疑問へのAIの回答の有無を決める(ミニマルでは、疑問は暫定で打ち消し線)
-3. 描き足す画面(詳細画面、設定画面、手動の再分類の操作の中身。手動の再分類は、ミニマルの着手前に要る)
+3. 描き足す画面(詳細画面、設定画面、手動の再分類の操作の中身。手動の再分類は、#5の着手前に要る)
 4. PC版とApple Watch版のUI
 5. アーキテクチャ設計の残り(下の未決事項)
 6. ローカルで骨組みを通す → 実行基盤を選ぶ → 薄く本番へ
@@ -47,6 +47,7 @@ Issueにする前の候補。Issueにしたら、この一覧から消す([0020]
 - 長押しメニューの細部
 - PC版とApple Watch版
 - 後方互換性のあるAPI設計の調査と考察
+- postismをprocessから独立させる(コントリビュートを受け入れる前に。きっかけは、CONTRIBUTING.mdを書く時点や、外部からの反応。postism側のIssueテンプレとPRテンプレの、processへの言及2か所の直しを含む)
 
 ## 未決事項
 
