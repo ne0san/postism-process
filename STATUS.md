@@ -24,6 +24,7 @@
 - アクセント色は紫系([0015](decisions/0015-accent-color-purple.md))
 - 入口は、右下の丸い追加ボタンから開くポップアップ([0016](decisions/0016-entry-button-popup.md))
 - 画面構成と表記: 下タブ4つ、「気づき」→「記録」、マーカーの形([0017](decisions/0017-screen-structure-and-labels.md))
+- AIが出す回答には「AIによる回答」と最小限の表記を付ける([0018](decisions/0018-ai-answer-label.md))
 
 ## 次にやること
 
@@ -45,7 +46,7 @@
 - 丸角の半透明のタブバーや、キーボードの上の入力欄を、PWAで実現できるか(未確認。[0016](decisions/0016-entry-button-popup.md)、[0017](decisions/0017-screen-structure-and-labels.md))
 - 一覧のソート、解決済みの打ち消し線(機能としてIssue化して扱う)
 - 複数行メモの扱い(見本では一覧で2行まで表示。全文を見せる詳細画面は未作成)
-- 解決済みの疑問の見せ方、疑問へのAIの回答の有無(見本に4案。ラベル「AIによる回答」は[0013](decisions/0013-design-principles.md)の原則2との整合も確認する)
+- 解決済みの疑問の見せ方、疑問へのAIの回答の有無(見本に4案。回答を出す場合のラベルは[0018](decisions/0018-ai-answer-label.md)で決定済み)
 - 分類の種類の増減
 - Effectの書き方の方針(`pipe`中心か`Effect.gen`中心か。postism側のCLAUDE.mdに書く)
 - スマホでのドラッグ&ドロップの扱い
