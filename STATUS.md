@@ -9,7 +9,7 @@
 
 - メモはサーバー上に保存する([0001](decisions/0001-memo-stored-on-server.md))
 - 将来Androidにも展開する([0002](decisions/0002-android-in-future.md))
-- クライアントはPWAを先行する([0003](decisions/0003-pwa-first.md))
+- クライアントは、クロスプラットフォームのアプリとWebを前提にする。FWは後で選ぶ([0019](decisions/0019-client-cross-platform-and-web.md)。0003のPWA先行を置き換え)
 - バックエンドはTypeScript + Effect、実行基盤は未確定([0004](decisions/0004-backend-typescript-effect.md))
 - 進め方はスクラム風([0005](decisions/0005-scrum-like-process.md))
 - 公開前提のポートフォリオ([0006](decisions/0006-public-portfolio.md))
@@ -43,7 +43,9 @@
 - AIに送る情報の線引き(位置、カレンダーなど)
 - 実行基盤(AWS Lambda、Cloudflare Workers など)と保存先のデータベース
 - ユーザーによる色の変更(種類ごとの色分けは[0014](decisions/0014-category-marker-colors.md)で承認済み。設定で変えられるようにするかは未決)
-- 丸角の半透明のタブバーや、キーボードの上の入力欄を、PWAで実現できるか(未確認。[0016](decisions/0016-entry-button-popup.md)、[0017](decisions/0017-screen-structure-and-labels.md))
+- クライアントのフレームワークの選定(Web側とアプリ側の両立方法を含む)
+- アプリとWebの着手順
+- 丸角の半透明のタブバーや、キーボードの上の入力欄を、選んだFWで実現できるか(未確認。[0016](decisions/0016-entry-button-popup.md)、[0017](decisions/0017-screen-structure-and-labels.md))
 - 一覧のソート、解決済みの打ち消し線(機能としてIssue化して扱う)
 - 複数行メモの扱い(見本では一覧で2行まで表示。全文を見せる詳細画面は未作成)
 - 解決済みの疑問の見せ方、疑問へのAIの回答の有無(見本に4案。回答を出す場合のラベルは[0018](decisions/0018-ai-answer-label.md)で決定済み)
