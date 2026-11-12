@@ -30,6 +30,7 @@
 - 手動の再分類は長押しメニューの「種類を変更」から。分類前は回転する丸で示す。複数行は折りたたみのトグル。折りたたみのないテキストのタップで編集。編集後も種類は今のまま。「編集」をミニマルに入れる。詳細画面は作らない([0022](decisions/0022-reclassify-pending-collapse-edit.md))。編集のIssue: [#6 編集する](https://github.com/ne0san/postism/issues/6)
 - 分類の契約: 種類は ToDo / 疑問 / 記録 の3種固定、1メモ=1種類、暫定のAIは Claude Haiku 5.5、確信度はユーザーに見せず統計として保存する、分類はメモを投げた直後に動かす([0023](decisions/0023-classification-contract.md))
 - イベントソーシングを採用する。実行基盤はAWS Lambda、イベントの保存先はDynamoDB、投影はTiDB。0004の実行基盤の未確定を確定する([0024](decisions/0024-event-sourcing-and-infrastructure.md))
+- メモの保存・削除ポリシー: 本文はイベントと別保存、旧版は内部の保険として7日で自動削除、メモ削除は即時の物理削除、アカウント削除でイベントも全消し、バックアップは使い残存期間を明記、AIに送るのは本文だけ、ログに本文は出さない([0025](decisions/0025-data-retention-and-deletion-policy.md))
 
 ## 次にやること
 
@@ -50,6 +51,7 @@ Issueにする前の候補。Issueにしたら、この一覧から消す([0020]
 - 分類の種類の追加(アイデア、予定など。使ってみて「記録」の中身を見てから。[0023](decisions/0023-classification-contract.md))
 - 長押しメニューの細部
 - PC版とApple Watch版
+- 完了のワンタッチ取り消し(完了を打ち消すイベントを追加する形。[0025](decisions/0025-data-retention-and-deletion-policy.md))
 - 後方互換性のあるAPI設計の調査と考察
 - postismをprocessから独立させる(コントリビュートを受け入れる前に。きっかけは、CONTRIBUTING.mdを書く時点や、外部からの反応。postism側のIssueテンプレとPRテンプレの、processへの言及2か所の直しを含む)
 
@@ -58,8 +60,9 @@ Issueにする前の候補。Issueにしたら、この一覧から消す([0020]
 - AIプロバイダーの最終確定(暫定は Claude Haiku 5.5。[0023](decisions/0023-classification-contract.md)。公式単価の確認が前提で、使ってみて見直す)
 - 認証(最初の1人用の方式、端末を増やすときの方式)
 - 失敗した分類の再試行の仕組み(定期的な巡回など。[0023](decisions/0023-classification-contract.md))
-- AIに送る情報の線引き(位置、カレンダーなど)
-- イベントの種類と形、同期のAPI(冪等性、カーソル)、投影の冪等性と再構築、メモの削除の扱い([0024](decisions/0024-event-sourcing-and-infrastructure.md))
+- 位置、カレンダーなどを分類の入力に使うかどうか(AIに送るのは本文だけと決定済み。[0025](decisions/0025-data-retention-and-deletion-policy.md))
+- イベントの種類と形(本文は別保存で参照のみ持つ前提)、同期のAPI(冪等性、カーソル)、投影の冪等性と再構築([0024](decisions/0024-event-sourcing-and-infrastructure.md)、[0025](decisions/0025-data-retention-and-deletion-policy.md))
+- バックアップの具体的な設定と削除後の残存期間(公式で確認)、プライバシーポリシーの作成(公開前)、AIプロバイダー側のデータの扱いの確認([0025](decisions/0025-data-retention-and-deletion-policy.md))
 - TiDBのプランと起動待ちの確認(公式で料金も確認。[0024](decisions/0024-event-sourcing-and-infrastructure.md))
 - ユーザーによる色の変更(種類ごとの色分けは[0014](decisions/0014-category-marker-colors.md)で承認済み。設定で変えられるようにするかは未決)
 - クライアントのフレームワークの選定(Web側とアプリ側の両立方法を含む)

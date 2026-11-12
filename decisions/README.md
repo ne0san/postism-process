@@ -53,3 +53,4 @@
 | [0022](0022-reclassify-pending-collapse-edit.md) | 手動の再分類の操作、分類前メモの見せ方、複数行の折りたたみ、メモの編集 | 承認 | 2026-11-12 |
 | [0023](0023-classification-contract.md) | 分類の契約: 3種の分類、AIプロバイダー、確信度の扱い | 承認 | 2026-11-12 |
 | [0024](0024-event-sourcing-and-infrastructure.md) | 実行基盤とデータ層: イベントソーシングを採用し、AWS Lambda + DynamoDB(イベント) + TiDB(投影)にする | 承認 | 2026-11-12 |
+| [0025](0025-data-retention-and-deletion-policy.md) | メモの保存・削除ポリシー: 本文の別保存、旧版7日、即時削除、アカウント削除でイベント全消し | 承認 | 2026-11-12 |
