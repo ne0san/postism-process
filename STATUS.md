@@ -27,7 +27,7 @@
 - AIが出す回答には「AIによる回答」と最小限の表記を付ける([0018](decisions/0018-ai-answer-label.md))
 - ミニマル範囲は、投げる / 裏で分類 / 一覧と種類別タブ / 解決にする / 手動の再分類。Issueは次に着手する可能性がある範囲だけ作り、残りは「あとでやる」に置く([0020](decisions/0020-minimal-scope-and-issue-policy.md))。ミニマルのIssue: [#1 投げる](https://github.com/ne0san/postism/issues/1) / [#2 一覧と種類別タブ](https://github.com/ne0san/postism/issues/2) / [#3 裏で分類](https://github.com/ne0san/postism/issues/3) / [#4 解決にする](https://github.com/ne0san/postism/issues/4) / [#5 手動で再分類](https://github.com/ne0san/postism/issues/5)
 - 解決済みの疑問は打ち消し線で見せる。疑問へのAIの回答は、つける前提でミニマルには含めない([0021](decisions/0021-resolved-question-display-and-ai-answer-scope.md))
-- 手動の再分類は長押しメニューの「種類を変更」から。分類前は回転する丸で示す。複数行は折りたたみのトグル。折りたたみのないテキストのタップで編集。編集後も種類は今のまま。「編集」をミニマルに入れる。詳細画面は作らない([0022](decisions/0022-reclassify-pending-collapse-edit.md))
+- 手動の再分類は長押しメニューの「種類を変更」から。分類前は回転する丸で示す。複数行は折りたたみのトグル。折りたたみのないテキストのタップで編集。編集後も種類は今のまま。「編集」をミニマルに入れる。詳細画面は作らない([0022](decisions/0022-reclassify-pending-collapse-edit.md))。編集のIssue: [#6 編集する](https://github.com/ne0san/postism/issues/6)
 
 ## 次にやること
 
