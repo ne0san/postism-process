@@ -28,13 +28,13 @@
 - ミニマル範囲は、投げる / 裏で分類 / 一覧と種類別タブ / 解決にする / 手動の再分類。Issueは次に着手する可能性がある範囲だけ作り、残りは「あとでやる」に置く([0020](decisions/0020-minimal-scope-and-issue-policy.md))。ミニマルのIssue: [#1 投げる](https://github.com/ne0san/postism/issues/1) / [#2 一覧と種類別タブ](https://github.com/ne0san/postism/issues/2) / [#3 裏で分類](https://github.com/ne0san/postism/issues/3) / [#4 解決にする](https://github.com/ne0san/postism/issues/4) / [#5 手動で再分類](https://github.com/ne0san/postism/issues/5)
 - 解決済みの疑問は打ち消し線で見せる。疑問へのAIの回答は、つける前提でミニマルには含めない([0021](decisions/0021-resolved-question-display-and-ai-answer-scope.md))
 - 手動の再分類は長押しメニューの「種類を変更」から。分類前は回転する丸で示す。複数行は折りたたみのトグル。折りたたみのないテキストのタップで編集。編集後も種類は今のまま。「編集」をミニマルに入れる。詳細画面は作らない([0022](decisions/0022-reclassify-pending-collapse-edit.md))。編集のIssue: [#6 編集する](https://github.com/ne0san/postism/issues/6)
+- 分類の契約: 種類は ToDo / 疑問 / 記録 の3種固定、1メモ=1種類、暫定のAIは Claude Haiku 5.5、確信度はユーザーに見せず統計として保存する、分類はメモを投げた直後に動かす([0023](decisions/0023-classification-contract.md))
 
 ## 次にやること
 
-1. 分類の入出力の契約を決めて、サンプルのメモで精度を確かめる(分類の種類の増減を含む。#3の前提)
-2. PC版とApple Watch版のUI
-3. アーキテクチャ設計の残り(下の未決事項)
-4. ローカルで骨組みを通す → 実行基盤を選ぶ → 薄く本番へ
+1. PC版とApple Watch版のUI
+2. アーキテクチャ設計の残り(下の未決事項)
+3. ローカルで骨組みを通す → 実行基盤を選ぶ → 薄く本番へ
 
 ## あとでやる
 
@@ -45,6 +45,8 @@ Issueにする前の候補。Issueにしたら、この一覧から消す([0020]
 - 疑問へのAIによる回答(つける前提。ミニマルには含めない([0021](decisions/0021-resolved-question-display-and-ai-answer-scope.md))。出すときは、疑問に分類したあとに別途質問を投げる仕組みにする案。ラベルは[0018](decisions/0018-ai-answer-label.md))
 - スマホでのドラッグ&ドロップによる再分類(技術の確認が先)
 - ユーザーが起動する再AI分類の操作(編集後も分類は今の種類のまま。[0022](decisions/0022-reclassify-pending-collapse-edit.md))
+- 1メモに複数の中身が混ざる場合の分割([0023](decisions/0023-classification-contract.md)で1メモ=1種類を採用。分割は後回し)
+- 分類の種類の追加(アイデア、予定など。使ってみて「記録」の中身を見てから。[0023](decisions/0023-classification-contract.md))
 - 長押しメニューの細部
 - PC版とApple Watch版
 - 後方互換性のあるAPI設計の調査と考察
@@ -52,9 +54,9 @@ Issueにする前の候補。Issueにしたら、この一覧から消す([0020]
 
 ## 未決事項
 
-- AIプロバイダー
+- AIプロバイダーの最終確定(暫定は Claude Haiku 5.5。[0023](decisions/0023-classification-contract.md)。公式単価の確認が前提で、使ってみて見直す)
 - 認証(最初の1人用の方式、端末を増やすときの方式)
-- 分類を動かすタイミング(定期的な巡回だけか、投げた直後にも回すか)
+- 失敗した分類の再試行の仕組み(定期的な巡回など。[0023](decisions/0023-classification-contract.md))
 - AIに送る情報の線引き(位置、カレンダーなど)
 - 実行基盤(AWS Lambda、Cloudflare Workers など)と保存先のデータベース
 - ユーザーによる色の変更(種類ごとの色分けは[0014](decisions/0014-category-marker-colors.md)で承認済み。設定で変えられるようにするかは未決)
@@ -62,7 +64,7 @@ Issueにする前の候補。Issueにしたら、この一覧から消す([0020]
 - アプリとWebの着手順
 - 丸角の半透明のタブバーや、キーボードの上の入力欄を、選んだFWで実現できるか(未確認。[0016](decisions/0016-entry-button-popup.md)、[0017](decisions/0017-screen-structure-and-labels.md))
 - 分類前のメモを編集できるか(編集中に分類が終わったときの扱いを含む)
-- 分類の種類の増減
+- 分類の検証サンプル(架空メモ200件)とスクリプトの置き場所(公開リポジトリに置くか)
 - Effectの書き方の方針(`pipe`中心か`Effect.gen`中心か。postism側のCLAUDE.mdに書く)
 - スマホでのドラッグ&ドロップの扱い
 - 「未確認」リスト(AI整理の直後で、まだ見ていない項目を見せる)をどう扱うか
@@ -77,10 +79,9 @@ Issueにする前の候補。Issueにしたら、この一覧から消す([0020]
 AI(Claude)が議論の中で出した案のうち、承認されていないもの。決定として扱わない。
 
 - Cloudflare Workers + D1 + Cron Trigger の構成
-- 5分おきの巡回、1回のAI呼び出しで分割・分類・回答をまとめて行う設計
+- 5分おきの巡回
 - 固定トークンによる認証
 - 4週間の工程案
-- 分類の種類の追加(調べもの、アイデア、想い)
 
 ## ふりかえり
 
