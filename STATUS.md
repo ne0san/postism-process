@@ -1,6 +1,6 @@
 # 現在地
 
-最終更新: 2026-11-11
+最終更新: 2026-11-12
 フェーズ: 設計の前の準備(進め方、記録の仕組み、リポジトリの整備)
 
 ## 決定済み
@@ -27,14 +27,14 @@
 - AIが出す回答には「AIによる回答」と最小限の表記を付ける([0018](decisions/0018-ai-answer-label.md))
 - ミニマル範囲は、投げる / 裏で分類 / 一覧と種類別タブ / 解決にする / 手動の再分類。Issueは次に着手する可能性がある範囲だけ作り、残りは「あとでやる」に置く([0020](decisions/0020-minimal-scope-and-issue-policy.md))。ミニマルのIssue: [#1 投げる](https://github.com/ne0san/postism/issues/1) / [#2 一覧と種類別タブ](https://github.com/ne0san/postism/issues/2) / [#3 裏で分類](https://github.com/ne0san/postism/issues/3) / [#4 解決にする](https://github.com/ne0san/postism/issues/4) / [#5 手動で再分類](https://github.com/ne0san/postism/issues/5)
 - 解決済みの疑問は打ち消し線で見せる。疑問へのAIの回答は、つける前提でミニマルには含めない([0021](decisions/0021-resolved-question-display-and-ai-answer-scope.md))
+- 手動の再分類は長押しメニューの「種類を変更」から。分類前は回転する丸で示す。複数行は折りたたみのトグル。折りたたみのないテキストのタップで編集。編集後も種類は今のまま。「編集」をミニマルに入れる。詳細画面は作らない([0022](decisions/0022-reclassify-pending-collapse-edit.md))
 
 ## 次にやること
 
 1. 分類の入出力の契約を決めて、サンプルのメモで精度を確かめる(分類の種類の増減を含む。#3の前提)
-2. 描き足す画面(詳細画面、設定画面、手動の再分類の操作の中身。手動の再分類は、#5の着手前に要る)
-3. PC版とApple Watch版のUI
-4. アーキテクチャ設計の残り(下の未決事項)
-5. ローカルで骨組みを通す → 実行基盤を選ぶ → 薄く本番へ
+2. PC版とApple Watch版のUI
+3. アーキテクチャ設計の残り(下の未決事項)
+4. ローカルで骨組みを通す → 実行基盤を選ぶ → 薄く本番へ
 
 ## あとでやる
 
@@ -44,6 +44,7 @@ Issueにする前の候補。Issueにしたら、この一覧から消す([0020]
 - 解決済みの表示切替(設定画面とセット)
 - 疑問へのAIによる回答(つける前提。ミニマルには含めない([0021](decisions/0021-resolved-question-display-and-ai-answer-scope.md))。出すときは、疑問に分類したあとに別途質問を投げる仕組みにする案。ラベルは[0018](decisions/0018-ai-answer-label.md))
 - スマホでのドラッグ&ドロップによる再分類(技術の確認が先)
+- ユーザーが起動する再AI分類の操作(編集後も分類は今の種類のまま。[0022](decisions/0022-reclassify-pending-collapse-edit.md))
 - 長押しメニューの細部
 - PC版とApple Watch版
 - 後方互換性のあるAPI設計の調査と考察
@@ -60,7 +61,7 @@ Issueにする前の候補。Issueにしたら、この一覧から消す([0020]
 - クライアントのフレームワークの選定(Web側とアプリ側の両立方法を含む)
 - アプリとWebの着手順
 - 丸角の半透明のタブバーや、キーボードの上の入力欄を、選んだFWで実現できるか(未確認。[0016](decisions/0016-entry-button-popup.md)、[0017](decisions/0017-screen-structure-and-labels.md))
-- 複数行メモの扱い(見本では一覧で2行まで表示。全文を見せる詳細画面は未作成)
+- 分類前のメモを編集できるか(編集中に分類が終わったときの扱いを含む)
 - 分類の種類の増減
 - Effectの書き方の方針(`pipe`中心か`Effect.gen`中心か。postism側のCLAUDE.mdに書く)
 - スマホでのドラッグ&ドロップの扱い

@@ -50,3 +50,4 @@
 | [0019](0019-client-cross-platform-and-web.md) | クライアントは、クロスプラットフォームのアプリとWebを前提にする(0003を置き換え) | 承認 | 2026-11-09 |
 | [0020](0020-minimal-scope-and-issue-policy.md) | ミニマル範囲の線引きと、Issue化の方針 | 承認 | 2026-11-09 |
 | [0021](0021-resolved-question-display-and-ai-answer-scope.md) | 解決済みの疑問は打ち消し線で見せる。疑問へのAIの回答は、つける前提でミニマルには含めない | 承認 | 2026-11-11 |
+| [0022](0022-reclassify-pending-collapse-edit.md) | 手動の再分類の操作、分類前メモの見せ方、複数行の折りたたみ、メモの編集 | 承認 | 2026-11-12 |
