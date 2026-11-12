@@ -10,7 +10,7 @@
 - メモはサーバー上に保存する([0001](decisions/0001-memo-stored-on-server.md))
 - 将来Androidにも展開する([0002](decisions/0002-android-in-future.md))
 - クライアントは、クロスプラットフォームのアプリとWebを前提にする。FWは後で選ぶ([0019](decisions/0019-client-cross-platform-and-web.md)。0003のPWA先行を置き換え)
-- バックエンドはTypeScript + Effect、実行基盤は未確定([0004](decisions/0004-backend-typescript-effect.md))
+- バックエンドはTypeScript + Effect。実行基盤は0024で確定([0004](decisions/0004-backend-typescript-effect.md))
 - 進め方はスクラム風([0005](decisions/0005-scrum-like-process.md))
 - 公開前提のポートフォリオ([0006](decisions/0006-public-portfolio.md))
 - リポジトリは3つ([0007](decisions/0007-three-repositories.md))
@@ -29,12 +29,13 @@
 - 解決済みの疑問は打ち消し線で見せる。疑問へのAIの回答は、つける前提でミニマルには含めない([0021](decisions/0021-resolved-question-display-and-ai-answer-scope.md))
 - 手動の再分類は長押しメニューの「種類を変更」から。分類前は回転する丸で示す。複数行は折りたたみのトグル。折りたたみのないテキストのタップで編集。編集後も種類は今のまま。「編集」をミニマルに入れる。詳細画面は作らない([0022](decisions/0022-reclassify-pending-collapse-edit.md))。編集のIssue: [#6 編集する](https://github.com/ne0san/postism/issues/6)
 - 分類の契約: 種類は ToDo / 疑問 / 記録 の3種固定、1メモ=1種類、暫定のAIは Claude Haiku 5.5、確信度はユーザーに見せず統計として保存する、分類はメモを投げた直後に動かす([0023](decisions/0023-classification-contract.md))
+- イベントソーシングを採用する。実行基盤はAWS Lambda、イベントの保存先はDynamoDB、投影はTiDB。0004の実行基盤の未確定を確定する([0024](decisions/0024-event-sourcing-and-infrastructure.md))
 
 ## 次にやること
 
 1. PC版とApple Watch版のUI
 2. アーキテクチャ設計の残り(下の未決事項)
-3. ローカルで骨組みを通す → 実行基盤を選ぶ → 薄く本番へ
+3. ローカルで骨組みを通す → 薄く本番へ(実行基盤は0024で確定済み)
 
 ## あとでやる
 
@@ -58,7 +59,8 @@ Issueにする前の候補。Issueにしたら、この一覧から消す([0020]
 - 認証(最初の1人用の方式、端末を増やすときの方式)
 - 失敗した分類の再試行の仕組み(定期的な巡回など。[0023](decisions/0023-classification-contract.md))
 - AIに送る情報の線引き(位置、カレンダーなど)
-- 実行基盤(AWS Lambda、Cloudflare Workers など)と保存先のデータベース
+- イベントの種類と形、同期のAPI(冪等性、カーソル)、投影の冪等性と再構築、メモの削除の扱い([0024](decisions/0024-event-sourcing-and-infrastructure.md))
+- TiDBのプランと起動待ちの確認(公式で料金も確認。[0024](decisions/0024-event-sourcing-and-infrastructure.md))
 - ユーザーによる色の変更(種類ごとの色分けは[0014](decisions/0014-category-marker-colors.md)で承認済み。設定で変えられるようにするかは未決)
 - クライアントのフレームワークの選定(Web側とアプリ側の両立方法を含む)
 - アプリとWebの着手順
@@ -78,7 +80,6 @@ Issueにする前の候補。Issueにしたら、この一覧から消す([0020]
 
 AI(Claude)が議論の中で出した案のうち、承認されていないもの。決定として扱わない。
 
-- Cloudflare Workers + D1 + Cron Trigger の構成
 - 5分おきの巡回
 - 固定トークンによる認証
 - 4週間の工程案
