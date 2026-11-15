@@ -54,7 +54,7 @@ Issueにする前の候補。Issueにしたら、この一覧から消す([0020]
 - 完了のワンタッチ取り消し(完了を打ち消すイベントを追加する形。[0025](decisions/0025-data-retention-and-deletion-policy.md))
 - 後方互換性のあるAPI設計の調査と考察
 - AIプロバイダの追加検証(OpenAIとAmazon Bedrockを試す。Bedrockは未経験で学習コストが大きそうなので、その見積りも含める。暫定のClaude Haiku 5.5の見直し材料にする。[0023](decisions/0023-classification-contract.md))
-- (ミニマル)分類モードの選択(Jevによる爆速分類が体験として面白い可能性があるため、高速分類モードと高精度分類モードを最小実装して体験を確かめる。[0023](decisions/0023-classification-contract.md))
+- 分類モードの選択(Jevによる爆速分類が体験として面白い可能性があるため、高速分類モードと高精度分類モードを最小実装して体験を確かめる。[0023](decisions/0023-classification-contract.md))
 - postismをprocessから独立させる(コントリビュートを受け入れる前に。きっかけは、CONTRIBUTING.mdを書く時点や、外部からの反応。postism側のIssueテンプレとPRテンプレの、processへの言及2か所の直しを含む)
 
 ## 未決事項
