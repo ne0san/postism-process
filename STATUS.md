@@ -30,12 +30,14 @@
 - 手動の再分類は長押しメニューの「種類を変更」から。分類前は回転する丸で示す。複数行は折りたたみのトグル。折りたたみのないテキストのタップで編集。編集後も種類は今のまま。「編集」をミニマルに入れる。詳細画面は作らない([0022](decisions/0022-reclassify-pending-collapse-edit.md))。編集のIssue: [#6 編集する](https://github.com/ne0san/postism/issues/6)
 - 分類の契約: 種類は ToDo / 疑問 / 記録 の3種固定、1メモ=1種類、暫定のAIは Claude Haiku 5.5、確信度はユーザーに見せず統計として保存する、分類はメモを投げた直後に動かす([0023](decisions/0023-classification-contract.md))
 - イベントソーシングを採用する。実行基盤はAWS Lambda、イベントの保存先はDynamoDB、投影はTiDB。0004の実行基盤の未確定を確定する([0024](decisions/0024-event-sourcing-and-infrastructure.md))
-- メモの保存・削除ポリシー: 本文はイベントと別保存、旧版は内部の保険として7日で自動削除、メモ削除は即時の物理削除、アカウント削除でイベントも全消し、バックアップは使い残存期間を明記、AIに送るのは本文だけ、ログに本文は出さない([0025](decisions/0025-data-retention-and-deletion-policy.md))
+- メモの保存・削除ポリシー: 本文はイベントと別保存、旧版は内部の保険として7日で自動削除、メモ削除は即時の物理削除、アカウント削除でイベントも全消し、バックアップは使い残存期間を明記、AIに送るのは本文だけ、ログに本文は出さない([0025](decisions/0025-data-retention-and-deletion-policy.md)。メモ削除とアカウント削除の部分は0027で置き換え)
+- イベントの種類と形: コマンド・イベント・クエリの区別、共通項目(日時、ユーザーID、actor)、メモIDはサーバー発行、冪等キーはクライアント発行で後勝ち、AI分類と人の再分類は別イベント、解決状態は種類と独立([0026](decisions/0026-event-design.md))
+- メモ削除はゴミ箱方式(7日)でミニマルに含める。アカウント削除の証跡だけ無期限で残し、メールは台帳に置いて鍵付きハッシュで照合([0027](decisions/0027-trash-and-deletion-revision.md))
 
 ## 次にやること
 
 1. PC版とApple Watch版のUI
-2. アーキテクチャ設計の残り(下の未決事項)
+2. アーキテクチャ設計の残り(同期API、投影、認証。下の未決事項)
 3. ローカルで骨組みを通す → 薄く本番へ(実行基盤は0024で確定済み)
 
 ## あとでやる
@@ -60,10 +62,11 @@ Issueにする前の候補。Issueにしたら、この一覧から消す([0020]
 ## 未決事項
 
 - AIプロバイダーの最終確定(暫定は Claude Haiku 5.5。[0023](decisions/0023-classification-contract.md)。公式単価の確認が前提で、使ってみて見直す)
-- 認証(最初の1人用の方式、端末を増やすときの方式)
+- 認証(最初の1人用の方式、端末を増やすときの方式。Cognitoは候補。メール台帳の置き場を兼ねる([0027](decisions/0027-trash-and-deletion-revision.md)))
 - 失敗した分類の再試行の仕組み(定期的な巡回など。[0023](decisions/0023-classification-contract.md))
 - 位置、カレンダーなどを分類の入力に使うかどうか(AIに送るのは本文だけと決定済み。[0025](decisions/0025-data-retention-and-deletion-policy.md))
-- イベントの種類と形(本文は別保存で参照のみ持つ前提)、同期のAPI(冪等性、カーソル)、投影の冪等性と再構築([0024](decisions/0024-event-sourcing-and-infrastructure.md)、[0025](decisions/0025-data-retention-and-deletion-policy.md))
+- 同期のAPI(カーソル。冪等キーは[0026](decisions/0026-event-design.md)で決定)、投影の冪等性と再構築([0024](decisions/0024-event-sourcing-and-infrastructure.md)、[0025](decisions/0025-data-retention-and-deletion-policy.md))
+- ゴミ箱の自動削除の定期バッチの方式、ハッシュ鍵の保管とローテーション(必要になったら)([0027](decisions/0027-trash-and-deletion-revision.md))
 - バックアップの具体的な設定と削除後の残存期間(公式で確認)、プライバシーポリシーの作成(公開前)、AIプロバイダー側のデータの扱いの確認([0025](decisions/0025-data-retention-and-deletion-policy.md))
 - TiDBのプランと起動待ちの確認(公式で料金も確認。[0024](decisions/0024-event-sourcing-and-infrastructure.md))
 - ユーザーによる色の変更(種類ごとの色分けは[0014](decisions/0014-category-marker-colors.md)で承認済み。設定で変えられるようにするかは未決)
