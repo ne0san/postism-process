@@ -36,11 +36,12 @@
 - 同期APIの形: ID・キーの命名(`memo_` / `key_` / `local_` + UUID v7)、バッチ送信と依存失敗、イベントを返して端末が投影、不透明なカーソル、本文の添付、複数端末はサーバー処理順の後勝ち([0028](decisions/0028-sync-api.md))
 - AI分類コマンドは、まだ分類がないメモにだけ通す。人の再分類のあとに届いたAI分類は破棄し、AI分類の二重実行も同じ規則で防ぐ([0029](decisions/0029-ai-classify-command-guard.md))
 - 投影は「最後に適用した連番」で冪等にする。再構築は別テーブルに再生して、読み取り先を切り替える。自動イベントも、コマンド側で状態を検証して二重実行を防ぐ([0030](decisions/0030-projection-idempotency-rebuild-auto-events.md))
+- 認証: 公開してサインアップできる前提。Cognito(Essentialsは暫定)+ Apple / Google(Hosted UIを、アプリのボタンから直接遷移で使う)。メール+パスワードは除外。アプリ内のアカウント削除を持つ([0031](decisions/0031-authentication-cognito-social.md))
 
 ## 次にやること
 
 1. PC版とApple Watch版のUI
-2. アーキテクチャ設計の残り(認証。下の未決事項)
+2. アーキテクチャ設計の残り
 3. クライアントFWの選定(投影ロジックの共有に関わる。[0028](decisions/0028-sync-api.md))
 4. ローカルで骨組みを通す → 薄く本番へ(実行基盤は0024で確定済み)
 
@@ -59,6 +60,7 @@ Issueにする前の候補。Issueにしたら、この一覧から消す([0020]
 - PC版とApple Watch版
 - 完了のワンタッチ取り消し(完了を打ち消すイベントを追加する形。[0025](decisions/0025-data-retention-and-deletion-policy.md))
 - 後方互換性のあるAPI設計の調査と考察
+- ログイン手段の追加(メール+パスワード、パスキーなど。[0031](decisions/0031-authentication-cognito-social.md))
 - AIプロバイダの追加検証(OpenAIとAmazon Bedrockを試す。Bedrockは未経験で学習コストが大きそうなので、その見積りも含める。暫定のClaude Haiku 5.5の見直し材料にする。[0023](decisions/0023-classification-contract.md))
 - 分類モードの選択(Jevによる爆速分類が体験として面白い可能性があるため、高速分類モードと高精度分類モードを最小実装して体験を確かめる。[0023](decisions/0023-classification-contract.md))
 - postismをprocessから独立させる(コントリビュートを受け入れる前に。きっかけは、CONTRIBUTING.mdを書く時点や、外部からの反応。postism側のIssueテンプレとPRテンプレの、processへの言及2か所の直しを含む)
@@ -66,12 +68,11 @@ Issueにする前の候補。Issueにしたら、この一覧から消す([0020]
 ## 未決事項
 
 - AIプロバイダーの最終確定(暫定は Claude Haiku 5.5。[0023](decisions/0023-classification-contract.md)。公式単価の確認が前提で、使ってみて見直す)
-- 認証(最初の1人用の方式、端末を増やすときの方式。Cognitoは候補。メール台帳の置き場を兼ねる([0027](decisions/0027-trash-and-deletion-revision.md)))
 - 失敗した分類の再試行の仕組み(定期的な巡回など。[0023](decisions/0023-classification-contract.md))
 - 位置、カレンダーなどを分類の入力に使うかどうか(AIに送るのは本文だけと決定済み。[0025](decisions/0025-data-retention-and-deletion-policy.md))
 - ページ分割の具体的な件数(実装時。[0028](decisions/0028-sync-api.md))
 - ゴミ箱の自動削除の定期バッチの方式、ハッシュ鍵の保管とローテーション(必要になったら)([0027](decisions/0027-trash-and-deletion-revision.md))
-- バックアップの具体的な設定と削除後の残存期間(公式で確認)、プライバシーポリシーの作成(公開前)、AIプロバイダー側のデータの扱いの確認([0025](decisions/0025-data-retention-and-deletion-policy.md))
+- バックアップの具体的な設定と削除後の残存期間(公式で確認)、プライバシーポリシーの作成(公開前)、AIプロバイダー側のデータの扱いの確認([0025](decisions/0025-data-retention-and-deletion-policy.md))、Appleの中継アドレスへのメールが届くかの確認([0031](decisions/0031-authentication-cognito-social.md))
 - TiDBのプランと起動待ちの確認(公式で料金も確認。[0024](decisions/0024-event-sourcing-and-infrastructure.md))
 - ユーザーによる色の変更(種類ごとの色分けは[0014](decisions/0014-category-marker-colors.md)で承認済み。設定で変えられるようにするかは未決)
 - クライアントのフレームワークの選定(Web側とアプリ側の両立方法を含む)

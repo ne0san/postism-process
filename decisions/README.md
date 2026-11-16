@@ -59,3 +59,4 @@
 | [0028](0028-sync-api.md) | 同期APIの形: ID・キーの命名、バッチ送信、イベントの取得、カーソル、本文の添付、複数端末の扱い | 承認 | 2026-11-16 |
 | [0029](0029-ai-classify-command-guard.md) | AI分類コマンドは、まだ分類がないメモにだけ通す | 承認 | 2026-11-16 |
 | [0030](0030-projection-idempotency-rebuild-auto-events.md) | 投影は連番で冪等にし、別テーブルで再生して切り替える。自動イベントも検証して二重実行を防ぐ | 承認 | 2026-11-16 |
+| [0031](0031-authentication-cognito-social.md) | 認証: 公開前提で、Cognito + Apple / Googleサインインにする | 承認 | 2026-11-16 |
