@@ -35,11 +35,12 @@
 - メモ削除はゴミ箱方式(7日)でミニマルに含める。アカウント削除の証跡だけ無期限で残し、メールは台帳に置いて鍵付きハッシュで照合([0027](decisions/0027-trash-and-deletion-revision.md))
 - 同期APIの形: ID・キーの命名(`memo_` / `key_` / `local_` + UUID v7)、バッチ送信と依存失敗、イベントを返して端末が投影、不透明なカーソル、本文の添付、複数端末はサーバー処理順の後勝ち([0028](decisions/0028-sync-api.md))
 - AI分類コマンドは、まだ分類がないメモにだけ通す。人の再分類のあとに届いたAI分類は破棄し、AI分類の二重実行も同じ規則で防ぐ([0029](decisions/0029-ai-classify-command-guard.md))
+- 投影は「最後に適用した連番」で冪等にする。再構築は別テーブルに再生して、読み取り先を切り替える。自動イベントも、コマンド側で状態を検証して二重実行を防ぐ([0030](decisions/0030-projection-idempotency-rebuild-auto-events.md))
 
 ## 次にやること
 
 1. PC版とApple Watch版のUI
-2. アーキテクチャ設計の残り(投影の冪等性と再構築、自動イベントの二重実行防止、認証。下の未決事項)
+2. アーキテクチャ設計の残り(認証。下の未決事項)
 3. クライアントFWの選定(投影ロジックの共有に関わる。[0028](decisions/0028-sync-api.md))
 4. ローカルで骨組みを通す → 薄く本番へ(実行基盤は0024で確定済み)
 
@@ -68,7 +69,6 @@ Issueにする前の候補。Issueにしたら、この一覧から消す([0020]
 - 認証(最初の1人用の方式、端末を増やすときの方式。Cognitoは候補。メール台帳の置き場を兼ねる([0027](decisions/0027-trash-and-deletion-revision.md)))
 - 失敗した分類の再試行の仕組み(定期的な巡回など。[0023](decisions/0023-classification-contract.md))
 - 位置、カレンダーなどを分類の入力に使うかどうか(AIに送るのは本文だけと決定済み。[0025](decisions/0025-data-retention-and-deletion-policy.md))
-- 投影の冪等性と再構築、自動イベント(ゴミ箱の定期バッチなど)の二重実行の防ぎ方([0024](decisions/0024-event-sourcing-and-infrastructure.md)、[0025](decisions/0025-data-retention-and-deletion-policy.md)、[0029](decisions/0029-ai-classify-command-guard.md))
 - ページ分割の具体的な件数(実装時。[0028](decisions/0028-sync-api.md))
 - ゴミ箱の自動削除の定期バッチの方式、ハッシュ鍵の保管とローテーション(必要になったら)([0027](decisions/0027-trash-and-deletion-revision.md))
 - バックアップの具体的な設定と削除後の残存期間(公式で確認)、プライバシーポリシーの作成(公開前)、AIプロバイダー側のデータの扱いの確認([0025](decisions/0025-data-retention-and-deletion-policy.md))
