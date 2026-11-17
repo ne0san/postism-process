@@ -38,12 +38,12 @@
 - 投影は「最後に適用した連番」で冪等にする。再構築は別テーブルに再生して、読み取り先を切り替える。自動イベントも、コマンド側で状態を検証して二重実行を防ぐ([0030](decisions/0030-projection-idempotency-rebuild-auto-events.md))
 - 認証: 公開してサインアップできる前提。Cognito(Essentialsは暫定)+ Apple / Google(Hosted UIを、アプリのボタンから直接遷移で使う)。メール+パスワードは除外。アプリ内のアカウント削除を持つ([0031](decisions/0031-authentication-cognito-social.md))
 - 分類の再試行: 失敗レスポンスで再試行(最初の1回に加えて3回、エクスポネンシャルバックオフ)。分類は常にキュー経由。諦めたらイベントに残し、画面は赤い丸囲みの「!」([0032](decisions/0032-classification-retry.md))
+- クライアントは、Expo(React Native)でスマホとWebを作る。Expoでできることは、Expoで。デスクトップは必要になったら検討する。ネイティブのUIを使いたい([0033](decisions/0033-client-expo-mobile-and-web.md))
 
 ## 次にやること
 
 1. PC版とApple Watch版のUI
-2. クライアントFWの選定(投影ロジックの共有に関わる。[0028](decisions/0028-sync-api.md))
-3. ローカルで骨組みを通す → 薄く本番へ(実行基盤は0024で確定済み)
+2. ローカルで骨組みを通す → 薄く本番へ(実行基盤は0024で確定済み)
 
 ## あとでやる
 
@@ -58,6 +58,7 @@ Issueにする前の候補。Issueにしたら、この一覧から消す([0020]
 - 分類の種類の追加(アイデア、予定など。使ってみて「記録」の中身を見てから。[0023](decisions/0023-classification-contract.md))
 - 長押しメニューの細部
 - PC版とApple Watch版
+- デスクトップ版の技術選定(必要になったとき。[0033](decisions/0033-client-expo-mobile-and-web.md))
 - 完了のワンタッチ取り消し(完了を打ち消すイベントを追加する形。[0025](decisions/0025-data-retention-and-deletion-policy.md))
 - 後方互換性のあるAPI設計の調査と考察
 - ログイン手段の追加(メール+パスワード、パスキーなど。[0031](decisions/0031-authentication-cognito-social.md))
@@ -74,9 +75,9 @@ Issueにする前の候補。Issueにしたら、この一覧から消す([0020]
 - ゴミ箱の自動削除の定期バッチの方式、ハッシュ鍵の保管とローテーション(必要になったら)([0027](decisions/0027-trash-and-deletion-revision.md))
 - バックアップの具体的な設定と削除後の残存期間(公式で確認)、プライバシーポリシーの作成(公開前)、AIプロバイダー側のデータの扱いの確認([0025](decisions/0025-data-retention-and-deletion-policy.md))、Appleの中継アドレスへのメールが届くかの確認([0031](decisions/0031-authentication-cognito-social.md))
 - ユーザーによる色の変更(種類ごとの色分けは[0014](decisions/0014-category-marker-colors.md)で承認済み。設定で変えられるようにするかは未決)
-- クライアントのフレームワークの選定(Web側とアプリ側の両立方法を含む)
 - アプリとWebの着手順
-- 丸角の半透明のタブバーや、キーボードの上の入力欄を、選んだFWで実現できるか(未確認。[0016](decisions/0016-entry-button-popup.md)、[0017](decisions/0017-screen-structure-and-labels.md))
+- 投影ロジックの共有方法([0028](decisions/0028-sync-api.md)、[0033](decisions/0033-client-expo-mobile-and-web.md))
+- NativeTabsの、Webでの見た目([0033](decisions/0033-client-expo-mobile-and-web.md))
 - 分類前のメモを編集できるか(編集中に分類が終わったときの扱いを含む)
 - 分類の検証サンプル(架空メモ200件)とスクリプトの置き場所(公開リポジトリに置くか)
 - Effectの書き方の方針(`pipe`中心か`Effect.gen`中心か。postism側のCLAUDE.mdに書く)
