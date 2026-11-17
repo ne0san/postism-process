@@ -1,6 +1,6 @@
 # 現在地
 
-最終更新: 2026-11-16
+最終更新: 2026-11-17
 フェーズ: 設計の前の準備(進め方、記録の仕組み、リポジトリの整備)
 
 ## 決定済み
@@ -39,6 +39,7 @@
 - 認証: 公開してサインアップできる前提。Cognito(Essentialsは暫定)+ Apple / Google(Hosted UIを、アプリのボタンから直接遷移で使う)。メール+パスワードは除外。アプリ内のアカウント削除を持つ([0031](decisions/0031-authentication-cognito-social.md))
 - 分類の再試行: 失敗レスポンスで再試行(最初の1回に加えて3回、エクスポネンシャルバックオフ)。分類は常にキュー経由。諦めたらイベントに残し、画面は赤い丸囲みの「!」([0032](decisions/0032-classification-retry.md))
 - クライアントは、Expo(React Native)でスマホとWebを作る。Expoでできることは、Expoで。デスクトップは必要になったら検討する。ネイティブのUIを使いたい([0033](decisions/0033-client-expo-mobile-and-web.md))
+- 分類失敗のメモは、赤い丸囲みの「!」で示し、長押しメニューに「もう一度分類する」を置く。ゴミ箱画面(一覧・長押し・空)のデザイン。入口は未決([0034](decisions/0034-failed-classification-and-trash-screens.md))
 
 ## 次にやること
 
@@ -69,6 +70,8 @@ Issueにする前の候補。Issueにしたら、この一覧から消す([0020]
 
 ## 未決事項
 
+- 「もう一度分類する」をミニマルに含めるか(0022の「ユーザーが起動する再AI分類」との関係。[0034](decisions/0034-failed-classification-and-trash-screens.md))
+- ゴミ箱画面への入口、「完全に削除」の確認の出し方([0034](decisions/0034-failed-classification-and-trash-screens.md))
 - AIプロバイダーの最終確定(暫定は Claude Haiku 5.5。[0023](decisions/0023-classification-contract.md)。公式単価の確認が前提で、使ってみて見直す)
 - 位置、カレンダーなどを分類の入力に使うかどうか(AIに送るのは本文だけと決定済み。[0025](decisions/0025-data-retention-and-deletion-policy.md))
 - ページ分割の具体的な件数(実装時。[0028](decisions/0028-sync-api.md))
