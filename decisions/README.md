@@ -63,3 +63,4 @@
 | [0032](0032-classification-retry.md) | 分類の再試行: キュー経由で、エクスポネンシャルバックオフ、3回で諦める | 承認 | 2026-11-16 |
 | [0033](0033-client-expo-mobile-and-web.md) | クライアントは、Expo(React Native)でスマホとWebを作る。デスクトップは必要になったら検討する | 承認 | 2026-11-16 |
 | [0034](0034-failed-classification-and-trash-screens.md) | 分類失敗のメモの見せ方と操作、ゴミ箱画面のデザイン | 承認 | 2026-11-17 |
+| [0035](0035-web-pc-design-rules.md) | Web版(PC幅)のデザインのルール | 承認 | 2026-11-17 |
